@@ -7,8 +7,8 @@ import java.awt.event.MouseMotionListener;
 class Mouse extends Frame implements MouseListener ,MouseMotionListener {
       Mouse()
       {
-
       }
+
     static JFrame j=new JFrame("Rishik");
     public static void main(String[] args) {
 
