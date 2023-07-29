@@ -69,6 +69,8 @@ class Mouse extends Frame implements MouseListener ,MouseMotionListener {
     @Override
     public void mouseMoved(MouseEvent e) {
 
+
+          //rishik patel
         l.setText("Mouse Location:"+e.getX()+","+e.getY());
 
 
