@@ -1,11 +1,71 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.*;
 
 
 public class MainUI {
-private static final String []category={null,"Housing","Transportation","Food","Entertainment","Travel","Shopping","Education","Utilities","Miscellaneous","Grocery"};
+    private static void addexp()
+    {
+        AddExpenseFrame obj=new AddExpenseFrame();
+
+    }
+    private  static void delexp(){
+        delete_ExP_frame obj=new delete_ExP_frame();
+    }
+    private static void modexp()
+    {
+        modify_Exp_frame ob=new modify_Exp_frame();
+    }
+    private static void rpt()
+    {
+        report_frame obj=new report_frame();
+    }
+    private static double getTotalExpenseAmount() {
+        // Connect to the database and fetch the sum of all expenses from the "expenses" table
+        String url = "jdbc:mysql://db4free.net:3306/expenseeee";
+        String username = "rishik";
+        String password = "a512be21";
+        String query = "SELECT SUM(amount) AS total FROM expenses";
+
+        double totalAmount = 0.0;
+
+        try (Connection conn = DriverManager.getConnection(url, username, password);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            if (rs.next()) {
+                totalAmount = rs.getDouble("total");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return totalAmount;
+    }
+
+    private static double getHighestExpenseAmount() {
+        // Connect to the database and fetch the highest expense amount from the "expenses" table
+        String url = "jdbc:mysql://db4free.net:3306/expenseeee";
+        String username = "rishik";
+        String password = "a512be21";
+        String query = "SELECT MAX(amount) AS highest FROM expenses";
+
+        double highestAmount = 0.0;
+
+        try (Connection conn = DriverManager.getConnection(url, username, password);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            if (rs.next()) {
+                highestAmount = rs.getDouble("highest");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return highestAmount;
+    }
+
     public static void createUI() {
         JFrame f = new JFrame("Expense Tracker");
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -40,11 +100,12 @@ private static final String []category={null,"Housing","Transportation","Food","
         //AddExpenseBtn
         JButton btn=new JButton("Add Expense");
         btn.setBorder(null);
-        btn.setFont(new Font("Proxima Nova Th",Font.PLAIN,20));
         btn.setBounds(250,200,200,40);
+        btn.setFont(new Font("Proxima Nova Th",Font.PLAIN,20));
         btn.setBackground(new Color(151,64,99));
         btn.setForeground(Color.white);
         btn.setFocusPainted(false);
+
         btn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -60,24 +121,8 @@ private static final String []category={null,"Housing","Transportation","Food","
                 btn.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             }
         });
-        btn.addActionListener(e -> System.out.println("Add"));
+        btn.addActionListener(e -> addexp());
         p.add(btn);
-
-        /*//category label
-        JLabel cat = new JLabel();
-        cat.setText("Category:");
-        cat.setForeground(Color.WHITE);
-        cat.setFont(new Font("NimbusSanNovTLig", Font.BOLD, 15));
-        cat.setHorizontalAlignment(SwingConstants.CENTER);
-        cat.setBounds(70,260,80,17);
-        p.add(cat);
-
-        //category
-        JComboBox<String> cmb=new JComboBox<>(category);
-        cmb.setEnabled(false);
-        cmb.setBounds(150,250,200,40);
-        cmb.setVisible(true);
-        p.add(cmb);*/
 
         //deletion
         JButton delbtn=new JButton("Delete Expense");
@@ -102,7 +147,7 @@ private static final String []category={null,"Housing","Transportation","Food","
                 delbtn.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             }
         });
-        delbtn.addActionListener(e -> System.out.println("Delete"));
+        delbtn.addActionListener(e -> delexp());
         p.add(delbtn);
 
         //modification
@@ -128,7 +173,7 @@ private static final String []category={null,"Housing","Transportation","Food","
                 modbtn.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             }
         });
-        modbtn.addActionListener(e -> System.out.println("Modify"));
+        modbtn.addActionListener(e -> modexp());
         p.add(modbtn);
 
         //report
@@ -154,7 +199,7 @@ private static final String []category={null,"Housing","Transportation","Food","
                 report.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             }
         });
-        report.addActionListener(e -> System.out.println("Report"));
+        report.addActionListener(e -> rpt());
         p.add(report);
         //total label
         JLabel total=new JLabel("Total Expenses");
@@ -164,13 +209,13 @@ private static final String []category={null,"Housing","Transportation","Food","
         total.setLocation(80,420);
         p.add(total);
 
-        Currency curr = Currency.getInstance("INR");
-        String symbol = curr.getSymbol();
-        JLabel ttl=new JLabel(symbol +" 5260");
-        ttl.setForeground(new Color(255,150,119));
-        ttl.setFont(new Font("NimbusSanNovTLig",Font.PLAIN, 20));
-        ttl.setSize(700,22);
-        ttl.setLocation(300,420);
+
+        double totalExpenseAmount = getTotalExpenseAmount();
+        JLabel ttl = new JLabel( "Rs. " + totalExpenseAmount);
+        ttl.setForeground(new Color(255, 150, 119));
+        ttl.setFont(new Font("NimbusSanNovTLig", Font.PLAIN, 20));
+        ttl.setSize(700, 22);
+        ttl.setLocation(300, 420);
         p.add(ttl);
 
         //Highest Label
@@ -181,11 +226,13 @@ private static final String []category={null,"Housing","Transportation","Food","
         high.setLocation(80,450);
         p.add(high);
 
-        JLabel high1=new JLabel(symbol +" 5260");
-        high1.setForeground(new Color(255,150,119));
-        high1.setFont(new Font("NimbusSanNovTLig",Font.PLAIN, 20));
-        high1.setSize(700,22);
-        high1.setLocation(300,450);
+        double highestExpenseAmount = getHighestExpenseAmount();
+        JLabel high1 = new JLabel( "Rs. " + highestExpenseAmount);
+        high1.setForeground(new Color(255, 150, 119));
+        high1.setFont(new Font("NimbusSanNovTLig", Font.PLAIN, 20));
+        high1.setSize(700, 22);
+        high1.setLocation(300, 450);
+        high1.setToolTipText("Highest Spending in Lifetime");
         p.add(high1);
 
         f.setVisible(true);
@@ -193,5 +240,7 @@ private static final String []category={null,"Housing","Transportation","Food","
 
     public static void main(String[] args) {
         createUI();
+
+
     }
 }
