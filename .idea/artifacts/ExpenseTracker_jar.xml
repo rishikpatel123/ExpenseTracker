@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="ExpenseTracker:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ExpenseTracker_jar</output-path>
+    <root id="archive" name="ExpenseTracker.jar">
+      <element id="module-output" name="ExpenseTracker" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Program Files (x86)/MySQL/Connector J 8.0/mysql-connector-j-8.0.33.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Program Files/Java/jdk-20/lib/jcalendar-1.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
