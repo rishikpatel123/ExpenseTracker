@@ -4,7 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
 
-//https://github.com/rishikpatel123/upskill_campus
+//https://github.com/rishikpatel123/Expense_Tracker
 public class MainUI {
     private static void addexp()
     {
