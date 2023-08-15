@@ -7,7 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
 import java.util.Calendar;
-//https://github.com/rishikpatel123/upskill_campus
+//https://github.com/rishikpatel123/Expense_Tracker
 
 public class delete_ExP_frame {
     private static final JFrame delf=new JFrame("Add Expense");
