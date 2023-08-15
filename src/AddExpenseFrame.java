@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Calendar;
-//https://github.com/rishikpatel123/upskill_campus
+//https://github.com/rishikpatel123/Expense_Tracker
 public class AddExpenseFrame {
     private  final String []category={null,"Housing","Transportation","Food","Entertainment","Travel","Shopping","Education","Utilities","Miscellaneous","Grocery"};
     private  final JFrame AddExpFrame=new JFrame("Add Expense");
