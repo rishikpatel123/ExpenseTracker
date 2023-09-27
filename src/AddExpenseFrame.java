@@ -75,8 +75,8 @@ public class AddExpenseFrame {
             try {
                 // Establish the database connection (Replace with your actual database credentials)
                 String url = "jdbc:mysql://db4free.net:3306/expenseeee";
-                String username = "rishik";
-                String password = "a512be21";
+                String username = "";
+                String password = "";
                 Connection conn = DriverManager.getConnection(url, username, password);
 
                 // Prepare the SQL query for inserting the expense data
