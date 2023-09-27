@@ -47,8 +47,8 @@ public class MainUI {
     private static double getHighestExpenseAmount() {
         // Connect to the database and fetch the highest expense amount from the "expenses" table
         String url = "jdbc:mysql://db4free.net:3306/expenseeee";
-        String username = "rishik";
-        String password = "a512be21";
+        String username = "";
+        String password = "";
         String query = "SELECT MAX(amount) AS highest FROM expenses";
 
         double highestAmount = 0.0;
