@@ -24,9 +24,9 @@ public class MainUI {
     }
     private static double getTotalExpenseAmount() {
         // Connect to the database and fetch the sum of all expenses from the "expenses" table
-        String url = "jdbc:mysql://db4free.net:3306/expenseeee";
-        String username = "rishik";
-        String password = "a512be21";
+        String url = "";//db url
+        String username = "";//your db username
+        String password = "";//Your db password
         String query = "SELECT SUM(amount) AS total FROM expenses";
 
         double totalAmount = 0.0;
@@ -46,7 +46,7 @@ public class MainUI {
 
     private static double getHighestExpenseAmount() {
         // Connect to the database and fetch the highest expense amount from the "expenses" table
-        String url = "jdbc:mysql://db4free.net:3306/expenseeee";
+        String url = "";//your db url
         String username = "";
         String password = "";
         String query = "SELECT MAX(amount) AS highest FROM expenses";
