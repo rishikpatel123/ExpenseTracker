@@ -15,9 +15,9 @@ public class report_frame {
 
     private void rpt() {
         // Connect to the database and fetch data from the "expenses" table
-        String url = "jdbc:mysql://db4free.net:3306/expenseeee";
-        String username = "";
-        String password = "";
+        String url = "";//your db url
+        String username = "";//your db username
+        String password = "";//your db password
         String query = "SELECT id, date, amount, category, description FROM expenses";
 
         try (Connection conn = DriverManager.getConnection(url, username, password);
